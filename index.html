@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Animated Login</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Thank-you loading overlay shown after signup -->
+  <div id="signupOverlay" class="signup-overlay" aria-hidden="true">
+    <div class="overlay-card">
+      <div class="overlay-title">Thank you for signing up!</div>
+      <div class="overlay-sub">Preparing your login...</div>
+      <div class="win-progress" aria-hidden="true">
+        <div class="progress-track">
+          <div class="progress-fill" id="overlayProgress"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="page">
+    <section class="login-shell" aria-labelledby="login-heading">
+      <h1 id="login-heading" class="visually-hidden">Sign in to your account</h1>
+
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🔐</div>
+        <div class="brand-text">
+          <span class="product">Acme</span>
+          <span class="tag">Secure Portal</span>
+        </div>
+      </div>
+
+  <form class="login-card" id="loginForm" novalidate>
+        <div class="card-header">
+          <h2 class="card-title">Welcome back</h2>
+          <p class="card-sub">Sign in to continue to your dashboard</p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required aria-required="true" placeholder="you@example.com">
+          <div class="field-underline" aria-hidden="true"></div>
+          <p class="field-error" id="emailError" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="password-row">
+            <input id="password" name="password" type="password" autocomplete="current-password" required aria-required="true" placeholder="Enter your password">
+            <button type="button" class="toggle-pass" id="togglePass" aria-label="Show password">Show</button>
+          </div>
+          <div class="field-underline" aria-hidden="true"></div>
+          <p class="field-error" id="passwordError" aria-live="polite"></p>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="submitBtn" type="submit">
+            <span class="btn-text">Sign in</span>
+            <span class="btn-loader" aria-hidden="true"></span>
+          </button>
+          <a class="link" href="#">Forgot password?</a>
+        </div>
+
+        <div class="divider">or continue with</div>
+
+        <div class="socials">
+          <button type="button" class="btn ghost" id="googleBtn">Continue with Google</button>
+          <button type="button" class="btn ghost">Continue with GitHub</button>
+        </div>
+
+  <p class="signup">Don't have an account? <a href="signup.html" class="btn ghost" role="button">Sign up</a></p>
+      </form>
+
+
+      <!-- Simulated Google sign-in modal (hidden, for demo) -->
+      <div class="google-modal" id="googleModal" role="dialog" aria-hidden="true">
+        <div class="google-card">
+          <h3>Sign in with Google</h3>
+          <p class="muted">This is a simulated flow for demo purposes.</p>
+          <button id="googleConfirm" class="btn primary">Continue as demo@google.com</button>
+          <button id="googleCancel" class="btn" style="margin-left:8px">Cancel</button>
+        </div>
+      </div>
+
+      <div class="success-toast" id="successToast" role="status" aria-live="polite">
+        <div class="success-icon">✅</div>
+        <div class="success-text">Signed in successfully!</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

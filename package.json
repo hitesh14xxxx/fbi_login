@@ -1,0 +1,13 @@
+{
+  "name": "fbi-demo-server",
+  "version": "1.0.0",
+  "description": "Simple server to persist demo credentials to a file for the static login/signup demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}

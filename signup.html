@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sign up — FBI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="login-shell" aria-labelledby="signup-heading">
+      <h1 id="signup-heading" class="visually-hidden">Create an account</h1>
+
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🔐</div>
+        <div class="brand-text">
+          <span class="product">Acme</span>
+          <span class="tag">Secure Portal</span>
+        </div>
+      </div>
+
+      <form class="login-card" id="signupForm" novalidate>
+        <div class="card-header">
+          <h2 class="card-title">Create account</h2>
+          <p class="card-sub">Sign up to access your dashboard</p>
+        </div>
+
+        <div class="field">
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="fullName" type="text" required placeholder="Your name">
+          <div class="field-underline" aria-hidden="true"></div>
+          <p class="field-error" id="nameError" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="signupEmail">Email</label>
+          <input id="signupEmail" name="signupEmail" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com">
+          <div class="field-underline" aria-hidden="true"></div>
+          <p class="field-error" id="signupEmailError" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="signupPassword">Password</label>
+          <input id="signupPassword" name="signupPassword" type="password" required placeholder="Create a password">
+          <div class="field-underline" aria-hidden="true"></div>
+          <p class="field-error" id="signupPasswordError" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="signupPassword2">Confirm password</label>
+          <input id="signupPassword2" name="signupPassword2" type="password" required placeholder="Confirm password">
+          <div class="field-underline" aria-hidden="true"></div>
+          <p class="field-error" id="signupPassword2Error" aria-live="polite"></p>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="signupBtn" type="submit">Create account</button>
+          <a class="link" href="index.html">Already have an account?</a>
+        </div>
+
+      </form>
+
+      <div class="success-toast" id="signupToast" role="status" aria-live="polite">
+        <div class="success-icon">✅</div>
+        <div class="success-text">Account created — redirecting to sign in...</div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
