@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Site Maintenance</title>
+  <style>
+    :root{--bg:#0b1220;--card:#0f1724;--accent:#6ee7b7;--muted:#9aa4b2}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#071023 0%, #08182b 100%);color:#e6eef6}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:48px}
+    .card{background:rgba(255,255,255,0.02);padding:36px 42px;border-radius:12px;max-width:720px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    h1{margin:0 0 8px;font-size:28px;letter-spacing:0.4px}
+    p{margin:0 0 18px;color:var(--muted)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{background:var(--accent);color:#022; padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    footer{margin-top:18px;color:rgba(230,238,246,0.55);font-size:13px}
+    @media (max-width:520px){.card{padding:20px;border-radius:10px}h1{font-size:22px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card" role="main">
+      <h1>Welcome to the website</h1>
+      <p>Sorry — this website is still under progress. We're working to bring you something great. Check back soon.</p>
+
+      <div class="cta">
+        <a class="btn" href="welcome.html">Back to Welcome</a>
+        <a class="btn secondary" href="index.html">Go to Sign-in (may be incomplete)</a>
+      </div>
+
+      <footer>
+        <div>Estimated ready: soon</div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
