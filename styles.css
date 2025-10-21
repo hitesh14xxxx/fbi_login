@@ -138,3 +138,5 @@ body{
 @media (prefers-reduced-motion: reduce){
   .login-shell, .btn-loader, .success-toast{animation:none;transition:none}
 }
+
+
