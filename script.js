@@ -81,17 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnText) btnText.textContent = 'Sign in';
 
         if (result.ok) {
-          // success
+          // success -> redirect to maintenance page
           if (successToast) successToast.classList.add('show');
           if (successToast) setTimeout(() => successToast.classList.remove('show'), 2400);
-          // animate card out
-          const shell = document.querySelector('.login-shell');
-          if (shell && shell.animate) {
-            shell.animate([
-              { transform: 'translateY(0) scale(1)', opacity: 1 },
-              { transform: 'translateY(-10px) scale(.98)', opacity: 0 }
-            ], { duration: 500, easing: 'cubic-bezier(.16,.8,.34,1)', fill: 'forwards' });
-          }
+          setTimeout(() => { window.location.href = 'maintenance.html'; }, 400);
         } else {
           // server returned error or server not available — fallback to localStorage check
           let ok = false;
@@ -106,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (ok) {
             if (successToast) successToast.classList.add('show');
             if (successToast) setTimeout(() => successToast.classList.remove('show'), 2400);
+            setTimeout(() => { window.location.href = 'maintenance.html'; }, 400);
           } else {
             // show invalid credentials messages
             if (passwordError) passwordError.textContent = 'Invalid email or password';
