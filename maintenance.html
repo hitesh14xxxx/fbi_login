@@ -3,36 +3,277 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Site Maintenance</title>
+  <title>Forum: Optimizing the Login Flow</title>
   <style>
-    :root{--bg:#0b1220;--card:#0f1724;--accent:#6ee7b7;--muted:#9aa4b2}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#071023 0%, #08182b 100%);color:#e6eef6}
-    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:48px}
-    .card{background:rgba(255,255,255,0.02);padding:36px 42px;border-radius:12px;max-width:720px;width:100%;box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
-    h1{margin:0 0 8px;font-size:28px;letter-spacing:0.4px}
-    p{margin:0 0 18px;color:var(--muted)}
-    .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{background:var(--accent);color:#022; padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    footer{margin-top:18px;color:rgba(230,238,246,0.55);font-size:13px}
-    @media (max-width:520px){.card{padding:20px;border-radius:10px}h1{font-size:22px}}
+    /* --- FORUM THEME STYLES --- */
+    :root{
+      --bg:#071024;
+      --card:#0f172a;
+      --accent:#0ea5e9; /* Sky Blue */
+      --muted:#94a3b8;
+      --border:#1e293b;
+      --reply-bg: #1a2538;
+      --author-text: #e2e8f0;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--author-text);
+    }
+    .wrap{
+      min-height:100%;
+      display:flex;
+      flex-direction: column; /* Allows content to stack top-down */
+      align-items:center;
+      padding:40px 16px;
+    }
+    
+    /* --- FORUM STRUCTURE --- */
+    .forum-container{
+      max-width:900px; /* Wider container for discussion */
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap: 20px;
+    }
+
+    /* --- TOPIC TITLE BAR --- */
+    .topic-header {
+      padding: 15px 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .topic-header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .topic-header h1{
+      margin: 10px 0 0;
+      font-size: 28px;
+      color: white;
+    }
+
+    /* --- POST CARD STYLES --- */
+    .post-card{
+      background: var(--card);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+    }
+    
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255,255,255,0.05);
+    }
+    .post-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--bg);
+    }
+    .post-author-name {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 15px;
+    }
+    .post-time {
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    .post-content p {
+      margin: 0 0 15px;
+      line-height: 1.6;
+      color: var(--author-text);
+      font-size: 15px;
+    }
+
+    .code-block {
+      background: #0d121c;
+      padding: 10px 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 15px 0;
+      border: 1px solid var(--border);
+    }
+    .code-block pre {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.4;
+      color: #6ee7b7; /* Code highlight color */
+    }
+
+    /* --- REPLY STYLES --- */
+    .reply-section {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .reply-card {
+      background: var(--reply-bg);
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      border-left: 3px solid var(--accent);
+    }
+
+    /* --- BUTTON/CTA STYLES --- */
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top: 15px;}
+    .btn{
+      background:var(--accent);
+      color:var(--bg); 
+      padding:10px 16px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #38bdf8;
+    }
+    .btn.secondary{
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--muted);
+    }
+    .btn.secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:520px){
+      .post-card, .reply-card{padding:15px;border-radius:10px}
+      .topic-header h1{font-size: 22px;}
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="card" role="main">
-      <h1>Welcome to the website</h1>
-      <p>Sorry — this website is still under progress. We're working to bring you something great. Check back soon.</p>
+    <div class="forum-container">
 
-      <div class="cta">
-        <a class="btn" href="welcome.html">Back to Welcome</a>
-        <a class="btn secondary" href="index.html">Go to Sign-in (may be incomplete)</a>
+      <div class="topic-header">
+        <a href="#">&lt; Back to All Threads</a>
+        <h1>Optimization Discussion: Refactoring `script.js` Login Logic</h1>
       </div>
 
-      <footer>
-        <div>Estimated ready: soon</div>
-      </footer>
-    </section>
+      <section class="post-card" role="article">
+        <div class="post-meta">
+          <div class="post-avatar">FM</div>
+          <div>
+            <span class="post-author-name">FiveM. Dev</span>
+            <div class="post-time">Posted 3 days ago</div>
+          </div>
+        </div>
+        
+        <div class="post-content">
+          <p>
+            I've been reviewing the logic in the login section of **`script.js`**. The current approach to authentication—where it attempts a server login *and then* falls back to a synchronous $\text{localStorage}$ check—is messy. It leads to duplicate success logic and violates the principle of separation of concerns.
+          </p>
+          <p>
+            Specifically, this section needs cleanup:
+          </p>
+          <div class="code-block">
+<pre>
+attemptServerLogin().then(result => {
+  // ... remove loading state ...
+
+  if (result.ok) {
+    // SUCCESS LOGIC DUPLICATION 1
+    // ... show success toast ...
+    setTimeout(() => { window.location.href = 'maintenance.html'; }, 400);
+  } else {
+    // ... FALLBACK LOGIC ...
+    let ok = false;
+    // ... localStorage check ...
+
+    if (ok) {
+      // SUCCESS LOGIC DUPLICATION 2
+      // ... show success toast ...
+      setTimeout(() => { window.location.href = 'maintenance.html'; }, 400);
+    } else {
+      // ... show invalid credentials ...
+    }
+  }
+});
+</pre>
+          </div>
+          <p>
+            How can we wrap the success action into a single, clean function to avoid $\text{DRY}$ violation, even with the dual auth path?
+          </p>
+        </div>
+        <div class="cta">
+          <button class="btn secondary">Reply</button>
+          <button class="btn secondary">Like (3)</button>
+        </div>
+      </section>
+
+      <div class="reply-section">
+        <h2 style="font-size:18px; color: var(--accent);">3 Replies</h2>
+
+        <div class="reply-card" role="comment">
+          <div class="post-meta">
+            <div class="post-avatar" style="background: #ef4444;">JS</div>
+            <div>
+              <span class="post-author-name">JavScriptGuru</span>
+              <div class="post-time">Replied 2 days ago</div>
+            </div>
+          </div>
+          <p style="margin:0;">
+            Good catch. The easiest fix is to move the redirect/toast logic out of the $\text{Promise}$ chain entirely and call it from a single place if *either* the server or $\text{localStorage}$ check passes. Use a single boolean `isSuccess` after both checks run.
+          </p>
+        </div>
+
+        <div class="reply-card" role="comment">
+          <div class="post-meta">
+            <div class="post-avatar" style="background: #10b981;">AB</div>
+            <div>
+              <span class="post-author-name">AsyncBender</span>
+              <div class="post-time">Replied 1 day ago</div>
+            </div>
+          </div>
+          <p style="margin:0;">
+            Even better: since `attemptServerLogin` is an $\text{async}$ function, just change the fallback logic to check $\text{localStorage}$ *before* the server call, but only if the server call fails.
+          </p>
+          <div class="code-block">
+<pre>
+const login = async () => {
+  const serverResult = await attemptServerLogin();
+  if (serverResult.ok) return handleSuccess();
+
+  const localStorageOk = checkLocalStorage();
+  if (localStorageOk) return handleSuccess();
+
+  handleFailure();
+};
+</pre>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cta">
+        <a class="btn" href="index.html">View Login Page Code</a>
+        <a class="btn secondary" href="signup.html">Explore Signup Code</a>
+      </div>
+
+    </div>
   </main>
 </body>
 </html>
